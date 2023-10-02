@@ -52,7 +52,7 @@ resource "aws_vpc_peering_connection" "peering" {
   vpc_id        = aws_vpc.main.id
   auto_accept   = true
   tags = {
-    Name = "peering from default vpc to ${var.env}-vpc"
+    Name = "peering-from-default-vpc-to-${var.env}-vpc"
   }
 }
 
