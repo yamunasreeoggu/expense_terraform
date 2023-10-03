@@ -20,3 +20,13 @@ module "public-lb" {
   alb_sg_allow_cidr = "0.0.0.0/0"
   subnets = module.vpc.public_subnets
 }
+
+module "private-lb" {
+  source = "./modules/alb"
+  env = var.env
+  alb_type = "private"
+  internal = true
+  vpc_id = module.vpc.vpc_id
+  alb_sg_allow_cidr = var.vpc_cidr
+  subnets = module.vpc.private_subnets
+}
