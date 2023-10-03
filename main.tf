@@ -40,6 +40,7 @@ module "frontend" {
   vpc_cidr      = var.vpc_cidr
   vpc_id        = module.vpc.vpc_id
   subnets       = module.vpc.private_subnets
+  workstation_node_cidr = var.workstation_node_cidr
 }
 
 module "backend" {
@@ -51,4 +52,5 @@ module "backend" {
   vpc_cidr      = var.vpc_cidr
   vpc_id        = module.vpc.vpc_id
   subnets       = module.vpc.private_subnets
+  workstation_node_cidr = var.workstation_node_cidr
 }

@@ -5,3 +5,4 @@ variable "vpc_id" {}
 variable "app_port" {}
 variable "vpc_cidr" {}
 variable "subnets" {}
+variable "workstation_node_cidr" {}
