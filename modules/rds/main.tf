@@ -42,3 +42,12 @@ resource "aws_rds_cluster" "rds_cluster" {
   master_password         = data.aws_ssm_parameter.master_password.value
   vpc_security_group_ids = [aws_security_group.security_group.id]
 }
+
+resource "aws_rds_cluster_instance" "cluster_instance" {
+  count              = 1
+  identifier         = "${var.env}-${var.component}-instance-${count.index}"
+  cluster_identifier = aws_rds_cluster.rds_cluster.id
+  instance_class     = "db.t3.medium"
+  engine             = aws_rds_cluster.rds_cluster.engine
+  engine_version     = aws_rds_cluster.rds_cluster.engine_version
+}
