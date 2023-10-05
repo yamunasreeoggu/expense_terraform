@@ -29,6 +29,8 @@ module "private-lb" {
   vpc_id = module.vpc.vpc_id
   alb_sg_allow_cidr = var.vpc_cidr
   subnets = module.vpc.private_subnets
+  dns_name = "backend-${var.env}.yamunadevops.online"
+  zone_id = "Z10281701O26X6KFZM8G8"
 }
 
 #module "frontend" {
