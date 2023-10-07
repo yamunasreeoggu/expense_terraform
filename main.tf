@@ -31,6 +31,7 @@ module "private-lb" {
   subnets = module.vpc.private_subnets
   dns_name = "backend-${var.env}.yamunadevops.online"
   zone_id = "Z10281701O26X6KFZM8G8"
+  tg_arn = module.backend.tg_arn
 }
 
 #module "frontend" {
