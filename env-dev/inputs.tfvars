@@ -8,3 +8,7 @@ default_vpc_id = "vpc-0f69303a5ee298d49"
 default_vpc_cidr = "172.31.0.0/16"
 default_route_table_id = "rtb-0cd5d19506508373c"
 workstation_node_cidr = [ "172.31.23.171/32" ]
+desired_capacity = 1
+max_size = 1
+min_size = 1
+instance_class = "db.t3.medium"

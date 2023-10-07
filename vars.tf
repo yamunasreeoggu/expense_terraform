@@ -8,3 +8,7 @@ variable "default_vpc_id" {}
 variable "default_vpc_cidr" {}
 variable "default_route_table_id" {}
 variable "workstation_node_cidr" {}
+variable "max_size" {}
+variable "min_size" {}
+variable "desired_capacity" {}
+variable "instance_class" {}

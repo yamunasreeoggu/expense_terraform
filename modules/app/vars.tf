@@ -6,3 +6,6 @@ variable "app_port" {}
 variable "vpc_cidr" {}
 variable "subnets" {}
 variable "workstation_node_cidr" {}
+variable "max_size" {}
+variable "min_size" {}
+variable "desired_capacity" {}

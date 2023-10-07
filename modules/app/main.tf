@@ -103,9 +103,9 @@ resource "aws_launch_template" "template" {
 
 resource "aws_autoscaling_group" "asg" {
   name               = "${var.env}-${var.component}"
-  desired_capacity   = 1
-  max_size           = 1
-  min_size           = 1
+  desired_capacity   = var.desired_capacity
+  max_size           = var.max_size
+  min_size           = var.min_size
   vpc_zone_identifier = var.subnets
   target_group_arns = [aws_lb_target_group.tg.arn]
 
