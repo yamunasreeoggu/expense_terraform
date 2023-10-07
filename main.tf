@@ -11,15 +11,18 @@ module "vpc" {
   default_route_table_id = var.default_route_table_id
 }
 
-#module "public-lb" {
-#  source = "./modules/alb"
-#  env = var.env
-#  alb_type = "public"
-#  internal = false
-#  vpc_id = module.vpc.vpc_id
-#  alb_sg_allow_cidr = "0.0.0.0/0"
-#  subnets = module.vpc.public_subnets
-#}
+module "public-lb" {
+  source = "./modules/alb"
+  env = var.env
+  alb_type = "public"
+  internal = false
+  vpc_id = module.vpc.vpc_id
+  alb_sg_allow_cidr = "0.0.0.0/0"
+  subnets = module.vpc.public_subnets
+  dns_name = "${var.env}.yamunadevops.online"
+  zone_id = "Z10281701O26X6KFZM8G8"
+  tg_arn = module.frontend.tg_arn
+}
 
 module "private-lb" {
   source = "./modules/alb"
