@@ -40,7 +40,8 @@ resource "aws_rds_cluster" "rds_cluster" {
   database_name           = "dummy"
   master_username         = data.aws_ssm_parameter.master_username.value
   master_password         = data.aws_ssm_parameter.master_password.value
-  vpc_security_group_ids = [aws_security_group.security_group.id]
+  vpc_security_group_ids  = [aws_security_group.security_group.id]
+  skip_final_snapshot     = true
 }
 
 resource "aws_rds_cluster_instance" "cluster_instance" {
