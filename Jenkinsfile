@@ -20,6 +20,9 @@ pipeline {
     }
 
     stage('Terraform Apply') {
+      input {
+        message "Should we continue?"
+      }
       steps {
         sh 'terraform ${ACTION} -var-file=env-${ENV}/inputs.tfvars -auto-approve'
       }
