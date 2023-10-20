@@ -134,6 +134,7 @@ resource "aws_lb_target_group" "tg" {
   port     = var.app_port
   protocol = "HTTP"
   vpc_id   = var.vpc_id
+  deregistration_delay = 30
   health_check {
     enabled = true
     healthy_threshold = 2
