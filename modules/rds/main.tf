@@ -1,4 +1,4 @@
-resource "aws_security_group" "security_group" {
+ resource "aws_security_group" "security_group" {
   name        = "${var.env}-${var.component}-sg"
   description = "${var.env}-${var.component}-sg"
   vpc_id      = var.vpc_id
@@ -42,6 +42,7 @@ resource "aws_rds_cluster" "rds_cluster" {
   master_password         = data.aws_ssm_parameter.master_password.value
   vpc_security_group_ids  = [aws_security_group.security_group.id]
   skip_final_snapshot     = true
+  kms_key_id              = var.kms_key_id
 }
 
 resource "aws_rds_cluster_instance" "cluster_instance" {

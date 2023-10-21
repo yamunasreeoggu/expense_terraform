@@ -13,3 +13,4 @@ variable "min_size" {}
 variable "desired_capacity" {}
 variable "instance_class" {}
 variable "prometheus_cidr" {}
+variable "kms_key_id" {}
