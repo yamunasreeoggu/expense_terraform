@@ -98,7 +98,7 @@ resource "aws_launch_template" "template" {
   }
 
   block_device_mappings {
-    device_name = "/dev/nvme0n1"
+    device_name = "/dev/xvda"
 
     ebs {
       volume_size           = 10
