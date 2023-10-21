@@ -97,6 +97,17 @@ resource "aws_launch_template" "template" {
     name = aws_iam_instance_profile.instance_profile.name
   }
 
+  block_device_mappings {
+    device_name = "/dev/nvme0n1"
+
+    ebs {
+      volume_size           = 10
+      encrypted             = true
+      delete_on_termination = true
+      kms_key_id            = var.kms_key_id
+    }
+  }
+
   user_data   = base64encode(templatefile("${path.module}/userdata.sh", {
     role_name = var.component,
     env       = var.env

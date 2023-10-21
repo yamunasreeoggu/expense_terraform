@@ -10,3 +10,4 @@ variable "max_size" {}
 variable "min_size" {}
 variable "desired_capacity" {}
 variable "prometheus_cidr" {}
+variable "kms_key_id" {}
