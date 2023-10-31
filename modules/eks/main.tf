@@ -7,33 +7,6 @@ resource "aws_eks_cluster" "main" {        #code taken from reg.terr.io - EKS - 
   }
 }
 
-resource "aws_iam_role" "main" {
-  name               = "${var.env}-${var.project_name}-eks-role"
-  assume_role_policy = jsonencode({     #code taken from role creation of app --> main.tf
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Sid    = ""
-        Principal = {
-          Service = "eks.amazonaws.com"  # as we are creating eks cluster
-        }
-      },
-    ]
-  })
-}
-
-resource "aws_iam_role_policy_attachment" "AmazonEKSClusterPolicy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role       = aws_iam_role.main.name
-}
-
-resource "aws_iam_role_policy_attachment" "AmazonEKSVPCResourceController" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
-  role       = aws_iam_role.main.name
-}
-
 resource "null_resource" "aws-auth" {
   depends_on = [aws_eks_cluster.main]
   provisioner "local-exec" {
@@ -41,5 +14,19 @@ resource "null_resource" "aws-auth" {
 aws eks update--kubeconfig --name ${var.env}-${var.project_name}
 aws-auth upsert --mapusers --userarn arn:aws:iam::492681564023:user/yamuna --username yamuna --groups system:masters
 EOF
+  }
+}
+
+resource "aws_eks_node_group" "main" {
+  cluster_name    = aws_eks_cluster.main.name
+  node_group_name = "${var.env}-${var.project_name}-ng"
+  node_role_arn   = aws_iam_role.node.arn
+  subnet_ids      = var.subnet_ids
+  instance_types = var.instance_types
+
+  scaling_config {
+    desired_size = var.node_count
+    max_size     = var.node_count
+    min_size     = var.node_count
   }
 }
