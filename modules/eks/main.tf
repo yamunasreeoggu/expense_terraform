@@ -35,6 +35,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSVPCResourceController" {
 }
 
 resource "null_resource" "aws-auth" {
+  depends_on = [aws_eks_cluster.main]
   provisioner "local-exec" {
     command = <<EOF
 aws eks update--kubeconfig --name ${var.env}-${var.project_name}
