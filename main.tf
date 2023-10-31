@@ -82,3 +82,10 @@ module "vpc" {
 #  instance_class = var.instance_class
 #  kms_key_id = var.kms_key_id
 #}
+
+module "eks" {
+  source = "./modules/eks"
+  project_name = var.project_name
+  env = var.env
+  subnet_ids = module.vpc.private_subnets
+}
