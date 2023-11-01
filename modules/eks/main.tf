@@ -30,13 +30,3 @@ resource "aws_eks_node_group" "main" {
     min_size     = var.node_count
   }
 }
-
-resource "aws_eks_identity_provider_config" "main" {
-  cluster_name = aws_eks_cluster.main.name
-
-  oidc {
-    client_id                     = split("/", aws_eks_cluster.main.identity[0].oidc[0].issuer)[4]
-    identity_provider_config_name = "oidc"
-    issuer_url                    = aws_eks_cluster.main.identity[0].oidc[0].issuer
-  }
-}
